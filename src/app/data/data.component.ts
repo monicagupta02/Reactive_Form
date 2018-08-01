@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-data',
@@ -8,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class DataComponent implements OnInit
 {
   item;
-  constructor() { 
+  
+  constructor(private user1: UserService) { 
 
-    this.item = JSON.parse(localStorage.getItem("formdata"));
+    //this.item = JSON.parse(localStorage.getItem("formdata"));
 
   }
 
   ngOnInit() {
+    this.item = this.user1.getData();
+    console.log(this.item, "in second componenet");
   }
 
 

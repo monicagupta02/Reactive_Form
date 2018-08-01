@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 //import { FormControl } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { UserService } from '../user.service';
+import { Router } from '../../../node_modules/@angular/router';
 //import { PasswordValidator } from '../../validators/password.validator';
 
 @Component({
@@ -12,27 +14,13 @@ import { Validators } from '@angular/forms';
 export class ReactiveFormComponent implements OnInit {
   profileForm : FormGroup;
 
-  onButtonClick(){
+ /* onButtonClick(){
 
     localStorage.setItem("formdata",JSON.stringify(this.profileForm.value));
 
-    }
-  
+    } */
 
-  function1()
-  {
-      if(this.profileForm.value.pass != this.profileForm.value.cpass)
-      {
-        // alert("Password entered is wrong");
-          console.log("wrong");
-      }
-      else
-      {
-        console.log("right");
-      }
-  }
-
-  constructor() { 
+    constructor(private user1:UserService,private router:Router) { 
     this.profileForm = new FormGroup({
       name:new FormControl('', [Validators.required,Validators.maxLength(20),Validators.pattern("^[a-zA-Z]+$")]),
       lname:new FormControl('',[Validators.required,Validators.maxLength(20),Validators.pattern("^[a-zA-Z]+$")]),
@@ -45,9 +33,37 @@ export class ReactiveFormComponent implements OnInit {
       cpass: new FormControl('',[Validators.required,Validators.minLength(4)]),
       gen :new FormControl('',[Validators.required,Validators.maxLength(20),Validators.pattern("^[a-zA-Z]+$")]),
       emp :new FormControl('',[Validators.required,Validators.maxLength(4),Validators.minLength(4),Validators.pattern('[0-9]*')]),
-    });
-    
+    }); 
   }
+
+    onButtonClick(){
+      this.user1.check(this.profileForm.value)
+      this.router.navigate(['/heroes']);
+    }
+
+  type:string="password";
+  showHide()
+  {
+      if(this.type==="text")
+        this.type="password";
+     else
+      this.type="text";   
+  }
+
+  function1()
+  {
+      if(this.profileForm.value.pass !== this.profileForm.value.cpass)
+      {
+        // alert("Password entered is wrong");
+          console.log("wrong");
+      }
+      else
+      {
+        console.log("right");
+      }
+  }
+  
+ 
   ngOnInit() {}
   
 }
