@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { Router } from '../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-data',
@@ -9,8 +10,11 @@ import { UserService } from '../user.service';
 export class DataComponent implements OnInit
 {
   item;
-  
-  constructor(private user1: UserService) { 
+  edit(){
+    
+    this.route.navigate(['/form']);
+   }
+  constructor(private user1: UserService,private route:Router) { 
 
     //this.item = JSON.parse(localStorage.getItem("formdata"));
 

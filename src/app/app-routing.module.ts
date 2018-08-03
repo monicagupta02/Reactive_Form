@@ -6,9 +6,7 @@ import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 
 const routes: Routes = [
   { 
-    path: '', 
-    redirectTo:'form', 
-    pathMatch: 'full' 
+    path: '', component:ReactiveFormComponent
   },
   { 
     path: 'heroes', 
@@ -19,7 +17,6 @@ const routes: Routes = [
     path:'form',
     component:ReactiveFormComponent
   }
-
 ];
 
 @NgModule({

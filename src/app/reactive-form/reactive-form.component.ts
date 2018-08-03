@@ -13,6 +13,7 @@ import { Router } from '../../../node_modules/@angular/router';
 })
 export class ReactiveFormComponent implements OnInit {
   profileForm : FormGroup;
+  test:boolean;
 
  /* onButtonClick(){
 
@@ -29,8 +30,8 @@ export class ReactiveFormComponent implements OnInit {
       //pass:new FormControl('',[Validators.required,Validators.minLength(5),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]),
       //cpass:new FormControl('',[Validators.required,Validators.minLength(5),Validators.minLength(5)]),
       
-      pass: new FormControl('',[Validators.required,Validators.minLength(4)]),
-      cpass: new FormControl('',[Validators.required,Validators.minLength(4)]),
+      pass: new FormControl('',[Validators.required,Validators.minLength(4),Validators.pattern('((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+={};:"|,.<>]).{0,16})')]),
+      cpass: new FormControl('',[Validators.required,Validators.minLength(4),Validators.pattern('((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+={};:"|,.<>]).{0,16})')]),
       gen :new FormControl('',[Validators.required,Validators.maxLength(20),Validators.pattern("^[a-zA-Z]+$")]),
       emp :new FormControl('',[Validators.required,Validators.maxLength(4),Validators.minLength(4),Validators.pattern('[0-9]*')]),
     }); 
@@ -50,20 +51,54 @@ export class ReactiveFormComponent implements OnInit {
       this.type="text";   
   }
 
+  showHide1()
+  {
+      if(this.type==="text")
+        this.type="password";
+     else
+      this.type="text";   
+  }
+
   function1()
   {
-      if(this.profileForm.value.pass !== this.profileForm.value.cpass)
+      if(this.profileForm.value.pass!==this.profileForm.value.cpass)
       {
-        // alert("Password entered is wrong");
+        //alert("Password entered is wrong");
           console.log("wrong");
+          this.test=false;
+
       }
       else
       {
         console.log("right");
+        this.test=true;
       }
+      return this.test;
   }
   
  
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(" qw")
+    var item;
+    if(window.location.pathname  =="/form"){
+      item = this.user1.getData();
+      this.profileForm.patchValue({
+      name:item.name,
+      lname:item.lname,
+      email:item.email,
+      con:item.con,
+      
+      pass:item.pass,
+      gen:item.gen,
+      emp:item.emp
+      
+
+
+  })
+  console.log("poi")
+ }
+
+
+  }
   
 }
