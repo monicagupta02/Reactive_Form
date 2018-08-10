@@ -8,6 +8,8 @@ import { DataComponent } from './data/data.component';
 import { EditComponent } from './edit/edit.component';
 import { UserService } from './user.service';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,8 @@ import { UserService } from './user.service';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    
     
   ],
   providers: [UserService],
